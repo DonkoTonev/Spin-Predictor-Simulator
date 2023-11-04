@@ -1,0 +1,101 @@
+{% block title %}{% endblock %}
+{% block content %}
+    <a class="nav-item nav-link active" href="/logout" style="font-size: 18px; color: white; float: right;">Logout</a>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+<table id="main-table">
+        <tr>
+            <td id="number-frame-container">
+                <div>
+                    <table id="number-frame" class="frame">
+                        {% set numbers = [
+                          {'value': 3, 'color': 'red'},
+                          {'value': 6, 'color': 'black'},
+                          {'value': 9, 'color': 'red'},
+                          {'value': 12, 'color': 'red'},
+                          {'value': 15, 'color': 'black'},
+                          {'value': 18, 'color': 'red'},
+                          {'value': 21, 'color': 'red'},
+                          {'value': 24, 'color': 'black'},
+                          {'value': 27, 'color': 'red'},
+                          {'value': 30, 'color': 'red'},
+                          {'value': 33, 'color': 'black'},
+                          {'value': 36, 'color': 'red'},
+                          {'value': 2, 'color': 'black'},
+                          {'value': 5, 'color': 'red'},
+                          {'value': 8, 'color': 'black'},
+                          {'value': 11, 'color': 'black'},
+                          {'value': 14, 'color': 'red'},
+                          {'value': 17, 'color': 'black'},
+                          {'value': 20, 'color': 'black'},
+                          {'value': 23, 'color': 'red'},
+                          {'value': 26, 'color': 'black'},
+                          {'value': 29, 'color': 'black'},
+                          {'value': 32, 'color': 'red'},
+                          {'value': 35, 'color': 'black'},
+                          {'value': 1, 'color': 'red'},
+                          {'value': 4, 'color': 'black'},
+                          {'value': 7, 'color': 'red'},
+                          {'value': 10, 'color': 'black'},
+                          {'value': 13, 'color': 'black'},
+                          {'value': 16, 'color': 'red'},
+                          {'value': 19, 'color': 'red'},
+                          {'value': 22, 'color': 'black'},
+                          {'value': 25, 'color': 'red'},
+                          {'value': 28, 'color': 'black'},
+                          {'value': 31, 'color': 'black'},
+                          {'value': 34, 'color': 'red'}
+                        ] %}
+                        {% for i in range(3) %}
+                          <tr class="row">
+                            {% for j in range(i*12, (i+1)*12) %}
+                              {% set number = numbers[j] %}
+                              <td>
+                                <input type="radio" name="number" id="number-{{ number.value }}" value="{{ number.value }}" class="number-input">
+                                <label for="number-{{ number.value }}" class="number-label" style="background-color: {{ number.color }}">{{ number.value }}</label>
+                              </td>
+                            {% endfor %}
+                          </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div id="spin-predictor-label">Spin Predictor:</div>
+    <div id="status-label">Spin count: 0<br>History:</div>
+    <img src="/static/Image-modified.png" height="300" width="300" style="float: left; margin: 50px; margin-left: 300px;"/>
+    <div id="matrix-frame" class="frame2" style="float: left;">
+        <table>
+            {% for i in range(6) %}
+                <tr class="row">
+                    {% for j in range(6) %}
+                        {% set text = matrix[i][j]|string %}
+                        <td class="cell {% if (i, j) in selectedNumbers or text in greenNumbers %}{% if text in greenNumbers %}yellow{% else %}green{% endif %}{% endif %}">
+                            {% if (i, j) in selectedNumbers or text in greenNumbers %}
+                                <span class="highlight">
+                            {% endif %}
+                            {{ text }}
+                            {% if (i, j) in selectedNumbers or text in greenNumbers %}
+                                </span>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                    <td class="spin-count row-spin-count">{{ spin_counts_row[i] }}</td>
+                </tr>
+            {% endfor %}
+            <tr class="row">
+                {% for i in range(6) %}
+                    <td class="spin-count col-spin-count">{{ spin_counts_col[i] }}</td>
+                {% endfor %}
+                <td class="empty-cell"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="button">
+    <button id="reset-button" class="button">Reset</button>
+</div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    {% endblock %}

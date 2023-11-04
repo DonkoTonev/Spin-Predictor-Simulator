@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{% block title %}{% endblock %}
+{% block content %}
+<style>
+    body {
+        background-color: #161834;
+        overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+        body {
+          background-size: 150vw 150vh;  /* Adjust the size for smaller screens */
+            
+        }
+    }
+    .login-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Set the background color with transparency */
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+    color: #333333;
+    filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
+}
+
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+
+    .alert {
+      margin-bottom: 20px;
+    }
+    .div1{
+        justify-content: center;
+        text-align: center;
+        margin: 50 auto;
+    }    
+
+</style>
+<div class="div1">
+    <img src="/static/Spin_predictor_Round.png" height="150" width="150"/>
+</div>
+<div class="container">
+    <div class="row" style="height: 600px;">
+        <div class="col-md-6 offset-md-3">
+            <div class="login-container">
+                <h2>Login</h2>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    <div class="alert alert-{{messages[0][0]}} alert-dismissible fade show" role="alert">
+                        {{messages[0][1]}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST" action="{{url_for('login')}}">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" placeholder="Enter your email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter your password" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
