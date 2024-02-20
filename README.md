@@ -18,11 +18,11 @@ Spin Predictor is a web application developed using Flask, JavaScript, HTML, and
 ## How to Use
 1. Clone the repository to your local machine.
     ```
-    git clone https://github.com/yourusername/spin-predictor.git
+    git clone https://github.com/yourusername/Spin-Predictor-Simulator.git
     ```
 2. Navigate to the project directory.
     ```
-    cd spin-predictor
+    cd Spin-Predictor-Simulator
     ```
 3. Install the required dependencies.
     ```
@@ -46,5 +46,3 @@ Contributions are welcome! If you would like to contribute to this project, plea
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Contact
-For any questions or feedback, feel free to contact the project maintainer at [your.email@example.com](mailto:your.email@example.com).
